@@ -137,14 +137,18 @@ public:
             temp->prev->next = temp->next;
         } else {
             head = temp->next; // Deleting the head
+            // setting the head prev to nullptr to avoid malloc error
             if (head) head->prev = nullptr;
+            else tail = nullptr;
         }   
 
         if (temp->next) {
             temp->next->prev = temp->prev;
         } else {
             tail = temp->prev; // Deleting the tail
+            // setting tail next to nullptr to avoid any memory issues
             if (tail) tail->next = nullptr;
+            else head = nullptr;
         }
 
         delete temp;
@@ -225,6 +229,7 @@ public:
 // Driver program
 int main() {
     DoublyLinkedList list;
+
     srand(time(0));
     int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
     int tempVal, tempPos;
@@ -255,7 +260,7 @@ int main() {
     cin >> tempPos;
     list.delete_pos(tempPos);
     
-    cout << "Final Doubly Linked List" << endl;
+    cout << "\nFinal Doubly Linked List" << endl;
     list.print();
 
 
