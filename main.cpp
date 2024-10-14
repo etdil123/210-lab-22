@@ -79,11 +79,24 @@ public:
     void pop_front(){
         // if the head null - list is empty nothing to pop
         if (!head) return;
+    
 
         Node * temp = head;
-        // make head next point to head prev
-        head = temp->next;
-        delete temp;
+
+        // if there's only one element - the head equals the tail
+        if (head == tail){
+            // delete temp and set head/tail to null
+            delete temp;
+            head = nullptr;
+            tail = nullptr;
+            return;
+        }
+        else{
+            // make head next point to head prev
+            head = temp->next;
+            head->prev = nullptr;
+            delete temp;
+        }
     }
 
     void pop_back(){
@@ -157,9 +170,8 @@ public:
                 cout << "Position too far - no element has been deleted" << endl;
                 return;
             }
-            else {
-                temp = temp->next;
-            }
+            temp = temp->next;
+        
         }
 
         if (temp->prev) {
@@ -245,11 +257,7 @@ int main() {
     
     cout << "Final Doubly Linked List" << endl;
     list.print();
-    
-    // cout << "Deleting list, then trying to print.\n";
-    // list.~DoublyLinkedList();
-    // cout << "List forward: ";
-    // list.print();
+
 
     return 0;
 }
