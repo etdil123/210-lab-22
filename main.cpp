@@ -123,12 +123,14 @@ public:
             temp->prev->next = temp->next;
         } else {
             head = temp->next; // Deleting the head
-        }
+            if (head) head->prev = nullptr;
+        }   
 
         if (temp->next) {
             temp->next->prev = temp->prev;
         } else {
             tail = temp->prev; // Deleting the tail
+            if (tail) tail->next = nullptr;
         }
 
         delete temp;
@@ -175,9 +177,6 @@ public:
         }
 
         delete temp;
-
-
-
     }
 
     void print() {
@@ -236,6 +235,7 @@ int main() {
     cout << "Please select value to delete: " << endl;
     cin >> tempVal;
     list.delete_val(tempVal);
+    list.print();
 
     
     // cout << "Deleting list, then trying to print.\n";
