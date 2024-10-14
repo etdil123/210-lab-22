@@ -92,14 +92,25 @@ public:
 
         Node * temp = tail;
 
-        tail = temp->prev;
-        tail->next = nullptr;
+        // if there's only one element - the head equals the tail
+        if (head == tail){
+            // delete temp and set head/tail to null
+            delete temp;
+            head = nullptr;
+            tail = nullptr;
+            return;
+        }
 
+        // make the tail equal to prev of tail
+        tail = temp->prev;
+        // set tail next to null
+        tail->next = nullptr;
+        // delete temp to pop the element
         delete temp;
 
     }
 
-    void delete_node(int value) {
+    void delete_val(int value) {
         if (!head) return; // Empty list
 
         Node* temp = head;
@@ -121,6 +132,13 @@ public:
         }
 
         delete temp;
+    }
+
+
+    void delete_pos(int position){
+
+
+        
     }
 
     void print() {
@@ -155,7 +173,8 @@ public:
 // Driver program
 int main() {
     DoublyLinkedList list;
-    int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
+    //int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
+    int size = 2;
 
     for (int i = 0; i < size; ++i)
         list.push_back(rand() % (MAX_NR-MIN_NR+1) + MIN_NR);
@@ -171,6 +190,10 @@ int main() {
 
     cout << "Popped list from back:" << endl;
     list.pop_back();
+    list.print();
+
+    cout << endl;
+    list.push_front(1);
     list.print();
 
     // cout << "Deleting list, then trying to print.\n";
