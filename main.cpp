@@ -90,11 +90,10 @@ public:
         // If head is null return from function - no items to pop
         if (!head) return;
 
-        Node * temp = head;
-        while (temp)
-            temp = temp->next;
+        Node * temp = tail;
 
         tail = temp->prev;
+        tail->next = nullptr;
 
         delete temp;
 
@@ -166,10 +165,18 @@ int main() {
     cout << "List backward: ";
     list.print_reverse();
 
-    cout << "Deleting list, then trying to print.\n";
-    list.~DoublyLinkedList();
-    cout << "List forward: ";
+    cout << "Popped list:" << endl;
+    list.pop_front();
     list.print();
+
+    cout << "Popped list from back:" << endl;
+    list.pop_back();
+    list.print();
+
+    // cout << "Deleting list, then trying to print.\n";
+    // list.~DoublyLinkedList();
+    // cout << "List forward: ";
+    // list.print();
 
     return 0;
 }
