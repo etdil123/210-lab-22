@@ -139,26 +139,39 @@ public:
         // if empty list just return
         if (!head) return;
 
+        if (position < 0) {
+            cout << "Position must be greater than 0" << endl;
+            return;
+        }
+
         Node * temp = head;
 
+        // going through each element in linked list
         for (int i = 0; i < position; i++){
-            if (!temp) return;
-
+            // if temp is null - the loop has gone too far 
+            if (!temp) {
+                cout << "Position too far - no element has been deleted" << endl;
+                return;
+            }
             else {
                 temp = temp->next;
             }
         }
 
         if (temp->prev) {
+            // get temp prev to point to temp next
             temp->prev->next = temp->next;
         } else {
-            head = temp->next; // Deleting the head
+            // delete head
+            head = temp->next; 
         }
 
         if (temp->next) {
+            // get temp next prev point to temp prev
             temp->next->prev = temp->prev;
         } else {
-            tail = temp->prev; // Deleting the tail
+            // delete tail
+            tail = temp->prev; 
         }
 
         delete temp;
@@ -199,28 +212,31 @@ public:
 // Driver program
 int main() {
     DoublyLinkedList list;
-    //int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
-    int size = 2;
+    srand(time(0));
+    int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
+    int tempVal, tempPos;
 
     for (int i = 0; i < size; ++i)
         list.push_back(rand() % (MAX_NR-MIN_NR+1) + MIN_NR);
+    
     cout << "List forward: ";
     list.print();
 
     cout << "List backward: ";
     list.print_reverse();
 
-    cout << "Popped list:" << endl;
+    cout << "Popped Element from Front:" << endl;
     list.pop_front();
     list.print();
 
-    cout << "Popped list from back:" << endl;
+    cout << "Popped Element from Back:" << endl;
     list.pop_back();
     list.print();
 
-    cout << "Deleting from index 2" << endl;
-    list.delete_pos(2);
-    list.print();
+    cout << "Please select value to delete: " << endl;
+    cin >> tempVal;
+    list.delete_val(tempVal);
+
     
     // cout << "Deleting list, then trying to print.\n";
     // list.~DoublyLinkedList();
