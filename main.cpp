@@ -114,6 +114,7 @@ public:
         if (!head) return; // Empty list
 
         Node* temp = head;
+
         while (temp && temp->data != value)
             temp = temp->next;
 
@@ -134,6 +135,7 @@ public:
         }
 
         delete temp;
+        
     }
 
 
@@ -237,6 +239,12 @@ int main() {
     list.delete_val(tempVal);
     list.print();
 
+    cout << "Please select position to delete: " << endl;
+    cin >> tempPos;
+    list.delete_pos(tempPos);
+    
+    cout << "Final Doubly Linked List" << endl;
+    list.print();
     
     // cout << "Deleting list, then trying to print.\n";
     // list.~DoublyLinkedList();
