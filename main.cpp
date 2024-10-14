@@ -199,8 +199,8 @@ public:
 // Driver program
 int main() {
     DoublyLinkedList list;
-    int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
-    
+    //int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
+    int size = 2;
 
     for (int i = 0; i < size; ++i)
         list.push_back(rand() % (MAX_NR-MIN_NR+1) + MIN_NR);
@@ -218,6 +218,9 @@ int main() {
     list.pop_back();
     list.print();
 
+    cout << "Deleting from index 2" << endl;
+    list.delete_pos(2);
+    list.print();
     
     // cout << "Deleting list, then trying to print.\n";
     // list.~DoublyLinkedList();
